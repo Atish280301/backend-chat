@@ -1,6 +1,7 @@
 //backend/controller/MessageController.js
 import { Message } from "../models/MessagesModel.js";
-import {mkdirSync, renameSync} from 'fs';
+import { mkdirSync, writeFileSync } from "fs";
+import path from "path";
 export const GetMessages = async (request, response, next) => {
     try {
         const user1 = request.userId;
@@ -30,15 +31,18 @@ export const uploadFile = async (request, response, next) => {
         console.log("Received file metadata:", request.file);
 
         const date = Date.now();
-        const fileDir = `uploads/files/${date}`;
-        const filename = `${fileDir}/${request.file.originalname}`;
+        const fileDir = path.join("uploads", "files", `${date}`);
+        const filename = path.join(fileDir, request.file.originalname);
 
+        // Ensure the directory exists
         mkdirSync(fileDir, { recursive: true });
-        renameSync(request.file.path, filename);
+
+        // Write the buffer data to a file
+        writeFileSync(filename, request.file.buffer);
 
         return response.status(200).json({ filePath: filename });
     } catch (error) {
-        console.log({ error });
+        console.log("File upload error:", error);
         return response.status(500).send("Internal Server Error");
     }
 }
