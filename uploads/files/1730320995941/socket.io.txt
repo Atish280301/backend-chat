@@ -1,0 +1,36 @@
+socket.io
+web socket is a communication protocol like http, ftp, smtp.
+
+HTTP
+	client -------request------> server
+	client <------response------ server
+HTTP client will send request to server. server will send response to the client.
+
+web socket
+	client <--------connection---------> server
+in web socket it will create a connection and then client and server send requests and responses simultaneously. 
+
+io means referring to entire server. if io.emit it means it referring to entire server.
+
+socket means referring to particular user/client.
+
+emit = event trigger
+
+on = event listener
+
+broadcast = this event(data)
+
+to = socket.to().emit() to trigger event for particular room
+
+join = to join user in room socket.join("roomname");
+
+client
+socket.on(event1,(m)=>{})
+socket.emit(btn,123);
+
+
+server
+io.emit(event1, "hi");
+socket.on(btn, (n)=>{})
+
+socket.broadcast.emit()
