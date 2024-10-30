@@ -28,7 +28,7 @@ const database = async() => {
 database();
 
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://vercel.com/lipun-sahus-projects/frontend-chat/ESB2Ksu7CvXeYb98Fov6Zy88UAvK"],
     methods: ["GET","POST","PUT","PATCH","DELETE"],
     credentials: true,
 }));
